@@ -1,0 +1,24 @@
+{
+  "name": "athlete-calculations",
+  "version": "1.0.0",
+  "description": "Performs common calculations for athletes",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/briang123/athlete-calculations.git"
+  },
+  "keywords": [
+    "athletes",
+    "calculations"
+  ],
+  "author": "Brian Gaines",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/briang123/athlete-calculations/issues"
+  },
+  "homepage": "https://github.com/briang123/athlete-calculations#readme"
+}
