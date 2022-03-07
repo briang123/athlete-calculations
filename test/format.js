@@ -10,7 +10,7 @@ const FORMAT_PRESETS = {
   'DHMS-LLLL': '%D %DL, %HH %HL, %M %ML, %S %SL',
   'DHMS-llll': '%D%Dl, %H%Hl, %M%Ml, %S%Sl',
   HMMSS: '%H:%MM:%SS',
-  'DHMS-Dl': '%D%Dl:%H:%M:%S',
+  'DHHMMSS-l': '%D%Dl:%HH:%MM:%SS',
 };
 
 function daysFormatter(value) {
