@@ -1,22 +1,24 @@
 const { formatter } = require('./format');
 const {
-  DISTANCE_UNITS,
   METERS_PER_MILE,
   METERS_PER_KM,
+  DISTANCE_UNITS,
   PACE_UNITS,
 } = require('./constants');
 const {
-  // getDistancePace,
   getMinutesFromHMS,
-  getTimeParts,
-  getTotalTimeTraveled,
   getTravelDistanceInMeters,
+  getTimeParts,
 } = require('./utils/conversion');
 
-function getDistancePace(minutes, units, unitTypes) {
+function getPaceInMeters(time, distance) {
+  return time / distance;
+}
+
+function getDistanceTime(minutes, units, unitTypes) {
   switch (units) {
     case unitTypes.MILES:
-      return minutes / METERS_PER_MILE;
+      return minutes * METERS_PER_MILE;
     case unitTypes.METERS:
     case unitTypes.KM:
       return minutes / METERS_PER_KM;
@@ -26,13 +28,13 @@ function getDistancePace(minutes, units, unitTypes) {
 }
 
 //todo: validate parameters
-function calculateTimeFromDistAndPace({
+function calculatePaceFromDistAndTime({
   distance = { traveled, units },
-  pace = { hours, minutes, seconds, units },
+  time = { hours, minutes, seconds },
   format = null,
 } = {}) {
   const { traveled: dTravel, units: dUnits } = distance;
-  const { hours: pHr, minutes: pMin, seconds: pSec, units: pUnits } = pace;
+  const { hours: tHr, minutes: tMin, seconds: tSec } = time;
 
   const traveledInMeters = getTravelDistanceInMeters(
     dTravel,
@@ -40,14 +42,14 @@ function calculateTimeFromDistAndPace({
     DISTANCE_UNITS,
   );
 
-  const paceMinutes = getMinutesFromHMS(pHr, pMin, pSec);
-  const distancePace = getDistancePace(paceMinutes, pUnits, PACE_UNITS);
-  const travelMinutes = getTotalTimeTraveled(traveledInMeters, distancePace);
-  const timeParts = getTimeParts(travelMinutes);
+  const timeMinutes = getMinutesFromHMS(tHr, tMin, tSec);
+  const pacePerMeter = getPaceInMeters(timeMinutes, traveledInMeters);
+  const distancePace = getDistanceTime(pacePerMeter, dUnits, PACE_UNITS);
+  const timeParts = getTimeParts(distancePace);
 
   return {
     distance: `${dTravel} ${dUnits}`,
-    pace: `${pHr}:${pMin}:${pSec}`,
+    time: `${tHr}:${tMin}:${tSec}`,
     totalTime: {
       ...timeParts,
       formatted: formatter({
@@ -59,7 +61,7 @@ function calculateTimeFromDistAndPace({
 }
 
 module.exports = {
-  calculateTimeFromDistAndPace,
+  calculatePaceFromDistAndTime,
 };
 
 //TODO: VALIDATION THOUGHTS...

@@ -1,11 +1,12 @@
 const { DISTANCE_UNITS, PACE_UNITS } = require('./constants');
-const { calculateTime, calculatePace } = require('./time');
-const { calculateDistance } = require('./distance');
+const { calculateTimeFromDistAndPace } = require('./time');
+const { calculatePaceFromDistAndTime } = require('./pace');
+const { calculateDistanceFromTimeAndPace } = require('./distance');
 
 function time({ distance, pace, format }) {
   return {
     message: 'Calculating time from distance and pace',
-    calculate: () => calculateTime({ distance, pace, format }),
+    calculate: () => calculateTimeFromDistAndPace({ distance, pace, format }),
   };
 }
 
@@ -13,7 +14,7 @@ function pace({ distance, time, format }) {
   return {
     message: 'Calculating pace from time and distance',
     calculate: () =>
-      calculatePace({
+      calculatePaceFromDistAndTime({
         distance,
         time,
         format,
@@ -29,7 +30,7 @@ function distance({ distance, time, pace }) {
   return {
     message: 'Calculating distance from time and pace',
     calculate: () =>
-      calculateDistance({
+      calculateDistanceFromTimeAndPace({
         distance,
         time,
         pace,

@@ -1,4 +1,3 @@
-const { getDecimalPart } = require('./core');
 const {
   DISTANCE_UNITS,
   HOURS_PER_DAY,
@@ -8,7 +7,24 @@ const {
   METERS_AROUND_TRACK,
   PACE_UNITS,
   SECONDS_PER_MINUTE,
-} = require('./constants');
+} = require('../constants');
+
+
+function getTimeParts(time) {
+  const totalMinutes = getTotalMinutesFromTime(time);
+  const totalHours = getHoursFromMinutes(totalMinutes);
+
+  const days = getDaysFromHours(totalHours);
+  const hours = getHours(days, totalHours);
+  const minutes = getMinutesIntoHour(totalMinutes);
+  const seconds = convertDecimalToSeconds(time);
+
+  return { days, hours, minutes, seconds };
+}
+
+function getDecimalPart(value) {
+  return value % 1;
+}
 
 function getMinutesFromSeconds(seconds) {
   return seconds / SECONDS_PER_MINUTE;
@@ -38,10 +54,6 @@ function getTotalTimeTraveled(distance, time) {
   return distance * time;
 }
 
-function getPaceInMeters(time, distance) {
-  return time / distance;
-}
-
 function getDaysFromHours(hours) {
   return Math.floor(hours / HOURS_PER_DAY);
 }
@@ -67,47 +79,17 @@ function getTravelDistanceInMeters(distance, units, unitTypes) {
   }
 }
 
-function getDistance(time, pace) {
-  return time / pace;
-}
-
-function getDistancePace(minutes, units, unitTypes) {
-  switch (units) {
-    case unitTypes.MILES:
-      return minutes / METERS_PER_MILE;
-    case unitTypes.METERS:
-    case unitTypes.KM:
-      return minutes / METERS_PER_KM;
-    default:
-      throw new Error('Invalid unit type');
-  }
-}
-
-function getDistanceTime(minutes, units, unitTypes) {
-  switch (units) {
-    case unitTypes.MILES:
-      return minutes * METERS_PER_MILE;
-    case unitTypes.METERS:
-    case unitTypes.KM:
-      return minutes / METERS_PER_KM;
-    default:
-      throw new Error('Invalid unit type');
-  }
-}
-
 module.exports = {
   convertDecimalToSeconds,
   getDaysFromHours,
-  getDistance,
-  getDistancePace,
-  getDistanceTime,
+  getDecimalPart,
   getHours,
   getHoursFromMinutes,
   getMinutesFromHMS,
   getMinutesFromSeconds,
   getMinutesIntoHour,
-  getPaceInMeters,
   getSecondsFromMinutes,
+  getTimeParts,
   getTotalMinutesFromTime,
   getTotalTimeTraveled,
   getTravelDistanceInMeters,

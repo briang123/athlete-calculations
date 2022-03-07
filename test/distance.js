@@ -1,13 +1,12 @@
-const { round } = require('./core');
-const {
-  getDistance,
-  getDistancePace,
-  getDistanceTime,
-  getMinutesFromHMS,
-} = require('./conversion');
+const { round } = require('./utils/common');
+const { getMinutesFromHMS } = require('./utils/conversion');
+
+function getDistance(time, pace) {
+  return time / pace;
+}
 
 //todo: validate parameters
-const calculateDistance = ({
+const calculateDistanceFromTimeAndPace = ({
   distance = { units },
   time = { hours, minutes, seconds },
   pace = { hours, minutes, seconds, units },
@@ -18,21 +17,18 @@ const calculateDistance = ({
 
   const timeMinutes = getMinutesFromHMS(tHr, tMin, tSec);
   const paceMinutes = getMinutesFromHMS(pHr, pMin, pSec);
-  const dist = round(getDistance(timeMinutes, paceMinutes), 2);
+  const dist = getDistance(timeMinutes, paceMinutes);
 
   return {
     time: `${tHr}:${tMin}:${tSec}`,
     pace: `${pHr}:${pMin}:${pSec} ${pUnits}`,
     totalDistance: {
-      distance: dist,
+      distance: round(dist, 2),
       units: dUnits,
     },
   };
 };
 
 module.exports = {
-  getDistance,
-  getDistancePace,
-  getDistanceTime,
-  calculateDistance,
+  calculateDistanceFromTimeAndPace,
 };
