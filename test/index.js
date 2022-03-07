@@ -7,7 +7,7 @@ import {
   fake5kRaceResults,
 } from 'athlete-calculations';
 
-function data() {
+function fakeData() {
   return {
     fetch: () => fake5kRaceResults,
   };
@@ -29,6 +29,22 @@ function pace() {
         distance,
         time,
         format,
+      }),
+    processAll: (data) =>
+      data.map((r) => {
+        return {
+          ...r,
+          pace: calculatePace({
+            distance: { traveled: r.Distance, units: r.Units.toLowerCase() },
+            time: {
+              hours: r.Hours,
+              minutes: r.Minutes,
+              seconds: r.Seconds,
+              units: r.Units.toLowerCase(),
+            },
+            format: '%M:%SS',
+          }).pace.formatted,
+        };
       }),
   };
 }
@@ -77,5 +93,9 @@ console.log(
   }),
 );
 
-const fakeData = data();
-console.log('Fake race results api', JSON.stringify(fakeData.fetch(), null, 2));
+const faker = fakeData();
+const fakeResults = faker.fetch();
+console.log(
+  'Calculate pace and append to race results',
+  JSON.stringify(p.processAll(fakeResults), null, 2),
+);

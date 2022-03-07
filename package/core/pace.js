@@ -50,7 +50,7 @@ export function calculatePaceFromDistAndTime({
   return {
     distance: `${dTravel} ${dUnits}`,
     time: `${tHr}:${tMin}:${tSec}`,
-    totalTime: {
+    pace: {
       ...timeParts,
       formatted: formatter({
         format: format ?? '%D%Dl %H:%MM:%SS',

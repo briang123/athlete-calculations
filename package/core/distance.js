@@ -22,8 +22,8 @@ export function calculateDistanceFromTimeAndPace({
   return {
     time: `${tHr}:${tMin}:${tSec}`,
     pace: `${pHr}:${pMin}:${pSec} ${pUnits}`,
-    totalDistance: {
-      distance: round(dist, 2),
+    distance: {
+      traveled: round(dist, 2),
       units: dUnits,
     },
   };
