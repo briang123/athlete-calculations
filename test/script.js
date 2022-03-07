@@ -1,20 +1,23 @@
 const { DISTANCE_UNITS, PACE_UNITS } = require('./constants');
-const { calculateTimeFromDistAndPace } = require('./time');
-const { calculatePaceFromDistAndTime } = require('./pace');
-const { calculateDistanceFromTimeAndPace } = require('./distance');
+const {
+  calculateTime,
+  calculatePace,
+  calculateDistance,
+} = require('./pace-calculator');
 
-function time({ distance, pace, format }) {
+function time() {
   return {
     message: 'Calculating time from distance and pace',
-    calculate: () => calculateTimeFromDistAndPace({ distance, pace, format }),
+    calculate: ({ distance, pace, format }) =>
+      calculateTime({ distance, pace, format }),
   };
 }
 
-function pace({ distance, time, format }) {
+function pace() {
   return {
     message: 'Calculating pace from time and distance',
-    calculate: () =>
-      calculatePaceFromDistAndTime({
+    calculate: ({ distance, time, format }) =>
+      calculatePace({
         distance,
         time,
         format,
@@ -22,15 +25,11 @@ function pace({ distance, time, format }) {
   };
 }
 
-function distance({ distance, time, pace }) {
-  //  const { units: dUnits } = distance;
-  // const { hours: tHrs, minutes: tMin, seconds: tSec } = time;
-  // const { hours: pHrs, minutes: pMin, seconds: pSec, units: pUnits } = pace;
-
+function distance() {
   return {
     message: 'Calculating distance from time and pace',
-    calculate: () =>
-      calculateDistanceFromTimeAndPace({
+    calculate: ({ distance, time, pace }) =>
+      calculateDistance({
         distance,
         time,
         pace,
@@ -40,23 +39,32 @@ function distance({ distance, time, pace }) {
 
 //==============================================================================
 //TESTS
-const t = time({
-  distance: { traveled: 3.1, units: DISTANCE_UNITS.MILES },
-  pace: { hours: 0, minutes: 6, seconds: 34, units: PACE_UNITS.MILES },
-  format: '%M:%SS',
-});
-console.log(t.message, t.calculate());
+const t = time();
+console.log(
+  t.message,
+  t.calculate({
+    distance: { traveled: 3.1, units: DISTANCE_UNITS.MILES },
+    pace: { hours: 0, minutes: 6, seconds: 34, units: PACE_UNITS.MILES },
+    format: '%M:%SS',
+  }),
+);
 
-const d = distance({
-  distance: { units: DISTANCE_UNITS.MILES },
-  time: { hours: 0, minutes: 20, seconds: 21 },
-  pace: { hours: 0, minutes: 6, seconds: 34, units: PACE_UNITS.MILES },
-});
-console.log(d.message, d.calculate());
+const d = distance();
+console.log(
+  d.message,
+  d.calculate({
+    distance: { units: DISTANCE_UNITS.MILES },
+    time: { hours: 0, minutes: 20, seconds: 21 },
+    pace: { hours: 0, minutes: 6, seconds: 34, units: PACE_UNITS.MILES },
+  }),
+);
 
-const p = pace({
-  distance: { traveled: 3.1, units: DISTANCE_UNITS.MILES },
-  time: { hours: 0, minutes: 20, seconds: 21, units: PACE_UNITS.MILES },
-  format: '%M:%SS',
-});
-console.log(p.message, p.calculate());
+const p = pace();
+console.log(
+  p.message,
+  p.calculate({
+    distance: { traveled: 3.1, units: DISTANCE_UNITS.MILES },
+    time: { hours: 0, minutes: 20, seconds: 21, units: PACE_UNITS.MILES },
+    format: '%M:%SS',
+  }),
+);

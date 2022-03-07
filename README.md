@@ -48,7 +48,7 @@ We can **calculate pace** from **time** and **distance**
 ```js
 import { DISTANCE_UNITS, PACE_UNITS, calculatePace } from 'athlete-calculations';
 
-calculatePace({
+calculatePaceFromDistAndTime({
 	distance: { traveled: 3.1, units: DISTANCE_UNITS.MILES },
 	time: { hours: 0, minutes: 20, seconds: 21, units: PACE_UNITS.MILES },
 	format: '%M:%SS', // ie. 'HMMSS' => '0:06:34' (using a preset)
@@ -75,7 +75,7 @@ We can **calculate time** from **distance** and **pace**
 ```js
 import { DISTANCE_UNITS, PACE_UNITS, calculateTime } from 'athlete-calculations';
 
-calculateTime({
+calculateTimeFromDistAndPace({
 	distance: { traveled: 3.1, units: DISTANCE_UNITS.MILES },
 	pace: { hours: 0, minutes: 6, seconds: 34, units: PACE_UNITS.MILES },
 	format: '%M:%SS', // ie. 'HMMSS' => '0:20:21' (using a preset)
