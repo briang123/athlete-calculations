@@ -1,4 +1,5 @@
 # athlete-calculations
+
 ## Overview
 
 An NPM package that contains a variety of useful functions for the athlete and endurance activity.
@@ -18,7 +19,7 @@ npm install athlete-calculations
 **The following format tokens are only available when calculating time or pace at this time.**
 
 | Input | Example | Description      |
-|:----- |:------- |:---------------- |
+| :---- | :------ | :--------------- |
 | %DD   | 01      | Days, 2-digit    |
 | %D    | 1       | Days             |
 | %HH   | 00-23   | Hours, 2-digit   |
@@ -33,13 +34,13 @@ npm install athlete-calculations
 **The following formatting presets are only available when calculating time or pace at this time.**
 
 | Input     | Tokens                         | Example                               | Description                                                              |
-|:--------- |:------------------------------ |:------------------------------------- |:------------------------------------------------------------------------ |
+| :-------- | :----------------------------- | :------------------------------------ | :----------------------------------------------------------------------- |
 | DHMS-LLLL | %D %DL, %H %HL, %M %ML, %S %SL | 1 day, 2 hours, 9 minutes, 34 seconds | Long output of Days, Hours, Minutes, and Seconds                         |
 | DHMS-llll | %D%Dl, %H%Hl, %M%Ml, %S%Sl     | 1d, 2hrs, 9min, 34sec                 | Short output of Days, Hours, Minutes, and Seconds                        |
 | HMMSS     | %H:%MM:%SS                     | 2:09:34                               | Hour, Minutes (2-digit), Seconds (2-digit)                               |
 | DHHMMSS-l | %D%Dl:%HH:%MM:%SS              | 1d:02:09:25                           | Short output of Days along with double-digit Hours, Minutes, and Seconds |
 
-## What Can We Do?
+## Pace Calculator
 
 ### Calculate Pace
 
@@ -48,7 +49,7 @@ We can **calculate pace** from **time** and **distance**
 ```js
 import { DISTANCE_UNITS, PACE_UNITS, calculatePace } from 'athlete-calculations';
 
-calculatePaceFromDistAndTime({
+calculatePace({
 	distance: { traveled: 3.1, units: DISTANCE_UNITS.MILES },
 	time: { hours: 0, minutes: 20, seconds: 21, units: PACE_UNITS.MILES },
 	format: '%M:%SS', // ie. 'HMMSS' => '0:06:34' (using a preset)
@@ -75,7 +76,7 @@ We can **calculate time** from **distance** and **pace**
 ```js
 import { DISTANCE_UNITS, PACE_UNITS, calculateTime } from 'athlete-calculations';
 
-calculateTimeFromDistAndPace({
+calculateTime({
 	distance: { traveled: 3.1, units: DISTANCE_UNITS.MILES },
 	pace: { hours: 0, minutes: 6, seconds: 34, units: PACE_UNITS.MILES },
 	format: '%M:%SS', // ie. 'HMMSS' => '0:20:21' (using a preset)
@@ -129,4 +130,3 @@ We welcome contributors to this package and ask that you're consistent with the 
 ## License
 
 [MIT @ Brian Gaines](https://github.com/briang123/athlete-calculations/blob/main/LICENSE)
-
