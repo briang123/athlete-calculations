@@ -31,16 +31,17 @@ function pace() {
         format,
       }),
     processAll: (data) =>
-      data.map((r) => {
+      data.map((resultItem) => {
+        const { distance, units, hours, minutes, seconds } = resultItem;
         return {
-          ...r,
+          ...resultItem,
           pace: calculatePace({
-            distance: { traveled: r.Distance, units: r.Units.toLowerCase() },
+            distance: { traveled: distance, units },
             time: {
-              hours: r.Hours,
-              minutes: r.Minutes,
-              seconds: r.Seconds,
-              units: r.Units.toLowerCase(),
+              hours,
+              minutes,
+              seconds,
+              units,
             },
             format: '%M:%SS',
           }).pace.formatted,
