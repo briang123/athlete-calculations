@@ -1,9 +1,3 @@
-const { calculateDistanceFromTimeAndPace } = require('./../core/distance');
-const { calculateTimeFromDistAndPace } = require('./../core/time');
-const { calculatePaceFromDistAndTime } = require('./../core/pace');
-
-module.exports = {
-  calculateDistance: calculateDistanceFromTimeAndPace,
-  calculateTime: calculateTimeFromDistAndPace,
-  calculatePace: calculatePaceFromDistAndTime,
-};
+export { calculateDistanceFromTimeAndPace as calculateDistance } from './../core/distance.js';
+export { calculateTimeFromDistAndPace as calculateTime } from './../core/time.js';
+export { calculatePaceFromDistAndTime as calculatePace } from './../core/pace.js';

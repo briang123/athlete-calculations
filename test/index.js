@@ -1,10 +1,17 @@
-const {
+import {
   calculateTime,
   calculatePace,
   calculateDistance,
   DISTANCE_UNITS,
   PACE_UNITS,
-} = require('athlete-calculations');
+  fake5kRaceResults,
+} from 'athlete-calculations';
+
+function data() {
+  return {
+    fetch: () => fake5kRaceResults,
+  };
+}
 
 function time() {
   return {
@@ -69,3 +76,6 @@ console.log(
     format: '%M:%SS',
   }),
 );
+
+const fakeData = data();
+console.log('Fake race results api', JSON.stringify(fakeData.fetch(), null, 2));

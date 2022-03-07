@@ -1,11 +1,11 @@
-const { doubleDigitize, pluralize } = require('../utils/common');
-const {
+import { doubleDigitize, pluralize } from '../utils/common.js';
+import {
   merger,
   getValueFromJsonIfExists,
   mergeTokenPatterns,
-} = require('../utils/merge');
+} from '../utils/merge.js';
 
-const FORMAT_PRESETS = {
+export const FORMAT_PRESETS = {
   'DHMS-LLLL': '%D %DL, %HH %HL, %M %ML, %S %SL',
   'DHMS-llll': '%D%Dl, %H%Hl, %M%Ml, %S%Sl',
   HMMSS: '%H:%MM:%SS',
@@ -60,7 +60,7 @@ function secondsFormatter(value) {
   };
 }
 
-function formatter({ format, days, hours, minutes, seconds }) {
+export function formatter({ format, days, hours, minutes, seconds }) {
   const D = daysFormatter(days);
   const H = hoursFormatter(hours);
   const M = minutesFormatter(minutes);
@@ -76,8 +76,3 @@ function formatter({ format, days, hours, minutes, seconds }) {
   const _format = getValueFromJsonIfExists(format, FORMAT_PRESETS);
   return merger({ format: _format, patterns, tokens });
 }
-
-module.exports = {
-  FORMAT_PRESETS,
-  formatter,
-};

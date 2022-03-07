@@ -1,16 +1,16 @@
-const { round } = require('../utils/common');
-const { getMinutesFromHMS } = require('../utils/conversion');
+import { round } from '../utils/common.js';
+import { getMinutesFromHMS } from '../utils/conversion.js';
 
 function getDistance(time, pace) {
   return time / pace;
 }
 
 //todo: validate parameters
-const calculateDistanceFromTimeAndPace = ({
+export function calculateDistanceFromTimeAndPace({
   distance = { units },
   time = { hours, minutes, seconds },
   pace = { hours, minutes, seconds, units },
-} = {}) => {
+} = {}) {
   const { units: dUnits } = distance;
   const { hours: tHr, minutes: tMin, seconds: tSec } = time;
   const { hours: pHr, minutes: pMin, seconds: pSec, units: pUnits } = pace;
@@ -27,8 +27,4 @@ const calculateDistanceFromTimeAndPace = ({
       units: dUnits,
     },
   };
-};
-
-module.exports = {
-  calculateDistanceFromTimeAndPace,
-};
+}

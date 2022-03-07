@@ -123,6 +123,49 @@ calculateDistance({
 }
 ```
 
+## Fake Race Results Data API
+
+The API provides you with an array of 30 race results you can use. The results data is came from a real race, but the names were replaced with random names from a random name generator. We also took the liberty of parsing the hours, minutes, and seconds from the result race results to make it easier to get at the individual time parts.
+
+```js
+import { fake5kRaceResults } from 'athlete-calculations';
+
+// A list of 30 race results
+[
+  {
+    Bib: '1',
+    Distance: '3.1',
+    Hours: '0',
+    Minutes: '20',
+    Name: 'Tiffany Carter',
+    Results: '0:20:16',
+    Seconds: '16',
+    Units: 'Miles',
+  },
+  {
+    Bib: '2',
+    Distance: '3.1',
+    Hours: '0',
+    Minutes: '21',
+    Name: 'Hamza Cohen',
+    Results: '0:21:56',
+    Seconds: '56',
+    Units: 'Miles',
+  },
+  //... removed for brevity
+  {
+    Bib: '30',
+    Distance: '3.1',
+    Hours: '0',
+    Minutes: '29',
+    Name: 'Paxton Weber',
+    Results: '0:29:01',
+    Seconds: '1',
+    Units: 'Miles',
+  },
+];
+```
+
 ## Contributing
 
 We welcome contributors to this package and ask that you're consistent with the coding style and attempt to keep the codebase DRY. Please report issues [here](https://github.com/briang123/athlete-calculations/issues).

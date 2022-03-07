@@ -1,15 +1,15 @@
-const { formatter } = require('./format');
-const {
+import { formatter } from './format.js';
+import {
   METERS_PER_MILE,
   METERS_PER_KM,
   DISTANCE_UNITS,
   PACE_UNITS,
-} = require('./constants');
-const {
+} from './constants.js';
+import {
   getMinutesFromHMS,
   getTravelDistanceInMeters,
   getTimeParts,
-} = require('../utils/conversion');
+} from '../utils/conversion.js';
 
 function getPaceInMeters(time, distance) {
   return time / distance;
@@ -28,7 +28,7 @@ function getDistanceTime(minutes, units, unitTypes) {
 }
 
 //todo: validate parameters
-function calculatePaceFromDistAndTime({
+export function calculatePaceFromDistAndTime({
   distance = { traveled, units },
   time = { hours, minutes, seconds },
   format = null,
@@ -59,10 +59,6 @@ function calculatePaceFromDistAndTime({
     },
   };
 }
-
-module.exports = {
-  calculatePaceFromDistAndTime,
-};
 
 //TODO: VALIDATION THOUGHTS...
 // function containZeroValues(arr) {

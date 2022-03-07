@@ -1,4 +1,4 @@
-const {
+import {
   DISTANCE_UNITS,
   HOURS_PER_DAY,
   METERS_PER_KM,
@@ -7,10 +7,10 @@ const {
   METERS_AROUND_TRACK,
   PACE_UNITS,
   SECONDS_PER_MINUTE,
-} = require('../core/constants');
+} from '../core/constants.js';
 
 
-function getTimeParts(time) {
+export function getTimeParts(time) {
   const totalMinutes = getTotalMinutesFromTime(time);
   const totalHours = getHoursFromMinutes(totalMinutes);
 
@@ -22,51 +22,51 @@ function getTimeParts(time) {
   return { days, hours, minutes, seconds };
 }
 
-function getDecimalPart(value) {
+export function getDecimalPart(value) {
   return value % 1;
 }
 
-function getMinutesFromSeconds(seconds) {
+export function getMinutesFromSeconds(seconds) {
   return seconds / SECONDS_PER_MINUTE;
 }
 
-function getSecondsFromMinutes(minutes) {
+export function getSecondsFromMinutes(minutes) {
   return Math.round(minutes * SECONDS_PER_MINUTE);
 }
 
-function getHoursFromMinutes(minutes) {
+export function getHoursFromMinutes(minutes) {
   return Math.floor(minutes / MINUTES_PER_HOUR);
 }
 
-function getHours(days, hours) {
+export function getHours(days, hours) {
   return hours - days * HOURS_PER_DAY;
 }
 
-function getMinutesIntoHour(totalMinutes) {
+export function getMinutesIntoHour(totalMinutes) {
   return totalMinutes % MINUTES_PER_HOUR;
 }
 
-function getMinutesFromHMS(hours, minutes, seconds) {
+export function getMinutesFromHMS(hours, minutes, seconds) {
   return hours * MINUTES_PER_HOUR + minutes * 1 + seconds / SECONDS_PER_MINUTE;
 }
 
-function getTotalTimeTraveled(distance, time) {
+export function getTotalTimeTraveled(distance, time) {
   return distance * time;
 }
 
-function getDaysFromHours(hours) {
+export function getDaysFromHours(hours) {
   return Math.floor(hours / HOURS_PER_DAY);
 }
-function getTotalMinutesFromTime(time) {
+export function getTotalMinutesFromTime(time) {
   return Math.floor(time);
 }
 
-function convertDecimalToSeconds(minutes) {
+export function convertDecimalToSeconds(minutes) {
   const decimalSeconds = getDecimalPart(minutes);
   return getSecondsFromMinutes(decimalSeconds);
 }
 
-function getTravelDistanceInMeters(distance, units, unitTypes) {
+export function getTravelDistanceInMeters(distance, units, unitTypes) {
   switch (units) {
     case unitTypes.MILES:
       return distance * METERS_PER_MILE;
@@ -79,18 +79,18 @@ function getTravelDistanceInMeters(distance, units, unitTypes) {
   }
 }
 
-module.exports = {
-  convertDecimalToSeconds,
-  getDaysFromHours,
-  getDecimalPart,
-  getHours,
-  getHoursFromMinutes,
-  getMinutesFromHMS,
-  getMinutesFromSeconds,
-  getMinutesIntoHour,
-  getSecondsFromMinutes,
-  getTimeParts,
-  getTotalMinutesFromTime,
-  getTotalTimeTraveled,
-  getTravelDistanceInMeters,
-};
+// module.exports = {
+//   convertDecimalToSeconds,
+//   getDaysFromHours,
+//   getDecimalPart,
+//   getHours,
+//   getHoursFromMinutes,
+//   getMinutesFromHMS,
+//   getMinutesFromSeconds,
+//   getMinutesIntoHour,
+//   getSecondsFromMinutes,
+//   getTimeParts,
+//   getTotalMinutesFromTime,
+//   getTotalTimeTraveled,
+//   getTravelDistanceInMeters,
+// };

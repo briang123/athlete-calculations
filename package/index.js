@@ -1,14 +1,7 @@
-const { DISTANCE_UNITS, PACE_UNITS } = require('./core/constants');
-const {
+export { DISTANCE_UNITS, PACE_UNITS } from './core/constants.js';
+export {
   calculateTime,
   calculatePace,
   calculateDistance,
-} = require('./api/pace-calculator');
-
-module.exports = {
-  calculateTime,
-  calculatePace,
-  calculateDistance,
-  DISTANCE_UNITS,
-  PACE_UNITS,
-};
+} from './api/pace-calculator.js';
+export { fake5kRaceResults } from './api/fake-data.js';
