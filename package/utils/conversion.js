@@ -78,19 +78,3 @@ export function getTravelDistanceInMeters(distance, units, unitTypes) {
       throw new Error('Invalid unit type');
   }
 }
-
-// module.exports = {
-//   convertDecimalToSeconds,
-//   getDaysFromHours,
-//   getDecimalPart,
-//   getHours,
-//   getHoursFromMinutes,
-//   getMinutesFromHMS,
-//   getMinutesFromSeconds,
-//   getMinutesIntoHour,
-//   getSecondsFromMinutes,
-//   getTimeParts,
-//   getTotalMinutesFromTime,
-//   getTotalTimeTraveled,
-//   getTravelDistanceInMeters,
-// };

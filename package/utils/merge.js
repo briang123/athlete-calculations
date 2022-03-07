@@ -9,10 +9,6 @@ function patternMatcher(match, sequence) {
   return exists(patternIndex) ? sequence[patternIndex + 1] : match;
 }
 
-export function mergeText(text, pattern, sequence = []) {
-  return text.replace(pattern, (match) => patternMatcher(match, sequence));
-}
-
 function sequencer(json = {}) {
   return [...new Set(Object.entries(json))].flat();
 }
@@ -22,15 +18,13 @@ export function merger({ format, patterns, tokens }) {
   return mergeText(format, patterns, sequenced);
 }
 
+export function mergeText(text, pattern, sequence = []) {
+  return text.replace(pattern, (match) => patternMatcher(match, sequence));
+}
+
 export function getValueFromJsonIfExists(value, json) {
   const sequence = sequencer(json);
   const index = sequence.findIndex((v) => v === value);
   return exists(index) ? sequence[index + 1] : value;
 }
 
-// module.exports = {
-//   getValueFromJsonIfExists,
-//   merger,
-//   mergeText,
-//   mergeTokenPatterns,
-// };
