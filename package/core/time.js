@@ -11,7 +11,7 @@ const {
   getTimeParts,
   getTotalTimeTraveled,
   getTravelDistanceInMeters,
-} = require('./utils/conversion');
+} = require('../utils/conversion');
 
 function getDistancePace(minutes, units, unitTypes) {
   switch (units) {

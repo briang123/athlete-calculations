@@ -9,7 +9,7 @@ const {
   getMinutesFromHMS,
   getTravelDistanceInMeters,
   getTimeParts,
-} = require('./utils/conversion');
+} = require('../utils/conversion');
 
 function getPaceInMeters(time, distance) {
   return time / distance;

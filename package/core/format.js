@@ -1,9 +1,9 @@
-const { doubleDigitize, pluralize } = require('./utils/common');
+const { doubleDigitize, pluralize } = require('../utils/common');
 const {
   merger,
   getValueFromJsonIfExists,
   mergeTokenPatterns,
-} = require('./utils/merge');
+} = require('../utils/merge');
 
 const FORMAT_PRESETS = {
   'DHMS-LLLL': '%D %DL, %HH %HL, %M %ML, %S %SL',

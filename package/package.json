@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Performs common calculations for athletes",
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -16,7 +15,7 @@
     "calculations"
   ],
   "author": "Brian Gaines",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/briang123/athlete-calculations/issues"
   },

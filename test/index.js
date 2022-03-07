@@ -1,9 +1,10 @@
-const { DISTANCE_UNITS, PACE_UNITS } = require('./constants');
 const {
   calculateTime,
   calculatePace,
   calculateDistance,
-} = require('./pace-calculator');
+  DISTANCE_UNITS,
+  PACE_UNITS,
+} = require('athlete-calculations');
 
 function time() {
   return {

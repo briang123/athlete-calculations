@@ -7,7 +7,7 @@ const {
   METERS_AROUND_TRACK,
   PACE_UNITS,
   SECONDS_PER_MINUTE,
-} = require('../constants');
+} = require('../core/constants');
 
 
 function getTimeParts(time) {

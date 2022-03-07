@@ -1,5 +1,5 @@
-const { round } = require('./utils/common');
-const { getMinutesFromHMS } = require('./utils/conversion');
+const { round } = require('../utils/common');
+const { getMinutesFromHMS } = require('../utils/conversion');
 
 function getDistance(time, pace) {
   return time / pace;
