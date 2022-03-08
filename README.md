@@ -318,6 +318,8 @@ console.log(
 
 ## Folder and File Structure
 
+It's understood that the structure of this project could change as we add more calculations and new functionality.
+
 ```
 dist
 src
@@ -334,6 +336,8 @@ src
 
 ### dist
 
+This is the folder where the released package bundle lives
+
 ### src/
 
 - index.js - entry point
@@ -341,13 +345,32 @@ src
 
 ### src/api
 
+We expose any public facing apis from this directory
+
+- fake-data.js - public api providing fake data
+- pace-calculator.js - public api providing all available functions related to pace the pace calculator
+
 ### src/core
+
+- constants.js - It's preferred to use constants so we have meaning behind values that are being used 
+- format.js - All domain objects and functions related to formatting our data
+- distance.js - Anything related to calculating distance
+- pace.js - Anything related to calculating pace
+- time.js - Anything related to calculating time
 
 ### src/mock-data
 
+Any data that we want to return as part of our mock data api
+
 ### src/utils
 
+- common.js - common household functions
+- conversion.js - functions pertaining to converting values
+- merge.js - functions pertaining to merging content together
+
 ### test
+
+This directory's index file allows for us to test the package prior to releasing it as we've created an npm link to the package in the src directory (`npm run link-pkg`). This allows us to simulate testing from a separate project.
 
 ## Contributing
 
