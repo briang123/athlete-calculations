@@ -25,9 +25,7 @@ export function processValidations(queue) {
 export function checkForNumberTypes(arr) {
   arr.forEach(({ value, label }) => {
     if (!isNumber(value)) {
-      throw new Error(
-        `${label} must be a valid number. Current type is '${typeof value}'`,
-      );
+      throw new Error(`'${label}' must be a valid number.`);
     }
   });
 }
