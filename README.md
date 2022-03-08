@@ -32,8 +32,8 @@ npm install -g verdaccio
 
 # If installing locally to run the code and make any changes, then
 # run these commands to setup the project and run tests
-cd athlete-calculations/src && npm link &&
-cd ../src && npm test &&
+cd athlete-calculations &&
+cd src && npm link && npm test &&
 cd ../test && npm link athlete-calculations && npm test &&
 cd ../src
 ```
