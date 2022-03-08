@@ -71,7 +71,7 @@ console.log(
   t.message,
   t.calculate({
     distance: { traveled: 3.1, units: 'TEST' },
-    pace: { hours: 1, minutes: 6, seconds: 34, units: PACE_UNITS.MILES },
+    pace: { hours: null, minutes: 6, seconds: 34, units: PACE_UNITS.MILES },
     format: '%M:%SS',
   }),
 );
