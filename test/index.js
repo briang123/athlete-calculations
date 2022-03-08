@@ -70,49 +70,49 @@ const t = time();
 console.log(
   t.message,
   t.calculate({
-    distance: { traveled: 3.1, units: DISTANCE_UNITS.MILES },
-    pace: { hours: 0, minutes: 6, seconds: 34, units: PACE_UNITS.MILES },
+    distance: { traveled: 3.1, units: 'TEST' },
+    pace: { hours: 1, minutes: 6, seconds: 34, units: PACE_UNITS.MILES },
     format: '%M:%SS',
   }),
 );
 
 //==============================================================================
 //TESTING DISTANCE
-const d = distance();
-console.log(
-  d.message,
-  d.calculate({
-    distance: { units: DISTANCE_UNITS.MILES },
-    time: { hours: 0, minutes: 20, seconds: 21 },
-    pace: { hours: 0, minutes: 6, seconds: 34, units: PACE_UNITS.MILES },
-  }),
-);
+// const d = distance();
+// console.log(
+//   d.message,
+//   d.calculate({
+//     distance: { units: DISTANCE_UNITS.MILES },
+//     time: { hours: 0, minutes: 20, seconds: 21 },
+//     pace: { hours: 0, minutes: 6, seconds: 34, units: PACE_UNITS.MILES },
+//   }),
+// );
 
 //==============================================================================
 // TESTING PACE
 //fixme: Notice there is a 1 second difference in pace when calculating miles vs. km
-const p = pace();
-console.log(
-  p.message({ traveled: 3.1, units: DISTANCE_UNITS.MILES }),
-  p.calculate({
-    distance: { traveled: 3.1, units: DISTANCE_UNITS.MILES },
-    time: { hours: 0, minutes: 20, seconds: 21, units: PACE_UNITS.MILES },
-    format: '%M:%SS',
-  }),
-);
+// const p = pace();
+// console.log(
+//   p.message({ traveled: 3.1, units: DISTANCE_UNITS.MILES }),
+//   p.calculate({
+//     distance: { traveled: 3.1, units: DISTANCE_UNITS.MILES },
+//     time: { hours: 0, minutes: 20, seconds: 21, units: PACE_UNITS.MILES },
+//     format: '%M:%SS',
+//   }),
+// );
 
-console.log(
-  p.message({ traveled: 5, units: DISTANCE_UNITS.KM }),
-  p.calculate({
-    distance: { traveled: 5, units: DISTANCE_UNITS.KM },
-    time: { hours: 0, minutes: 20, seconds: 21, units: PACE_UNITS.MILES },
-    format: '%M:%SS',
-  }),
-);
+// console.log(
+//   p.message({ traveled: 5, units: DISTANCE_UNITS.KM }),
+//   p.calculate({
+//     distance: { traveled: 5, units: DISTANCE_UNITS.KM },
+//     time: { hours: 0, minutes: 20, seconds: 21, units: PACE_UNITS.MILES },
+//     format: '%M:%SS',
+//   }),
+// );
 
-const faker = fakeData();
-const fakeResults = faker.fetch();
-console.log(
-  'Calculate pace and append to race results',
-  JSON.stringify(p.processResults(fakeResults), null, 2),
-);
+// const faker = fakeData();
+// const fakeResults = faker.fetch();
+// console.log(
+//   'Calculate pace and append to race results',
+//   JSON.stringify(p.processResults(fakeResults), null, 2),
+// );

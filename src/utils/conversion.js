@@ -76,6 +76,6 @@ export function getTravelDistanceInMeters(distance, units, unitTypes) {
     // case unitTypes.METERS:
     //   return distance / METERS_AROUND_TRACK;
     default:
-      throw new Error('Invalid unit type');
+      throw new Error(`Invalid unit type: ${units}`);
   }
 }
