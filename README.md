@@ -4,12 +4,124 @@
 
 An NPM package that contains a variety of useful functions for the athlete and endurance activity.
 
-## Getting Started
+## Installing and Using the Package 🚀
 
-https://github.com/briang123/athlete-calculations
-
-```
+```bash
 npm install athlete-calculations
+```
+
+## ESM (EcmaScript Modules)
+
+This package uses ESM so you should be able to use a more modern approach to importing functions from this library.
+
+```js
+// ✅ Good
+import { calculatePace } from 'athlete-calculations';
+
+// 🟥 Bad ;)
+const { calculatePace } = require('athlete-calculations');
+```
+
+## ✨ Cloning the Project and Working with the Codebase
+
+```bash
+git clone https://github.com/briang123/athlete-calculations
+
+# Install Verdaccio globally so we can access it anywhere. This is our local NPM development server for when we want to test changes BEFORE we publish to NPM servers
+npm install -g verdaccio
+
+# If installing locally to run the code and make any changes, then
+# run these commands to setup the project and run tests
+cd athlete-calculations/src && npm link &&
+cd ../src && npm test &&
+cd ../test && npm link athlete-calculations && npm test &&
+cd ../src
+```
+
+### Running Tests
+
+Run the tests in the project
+
+```bash
+npm test
+```
+
+Run the tests in the project and allow Jest to watch for any changes so that tests can auto run after changes
+
+```bash
+npm run test:watch
+```
+
+### Build
+
+We use `esbuild` to build a minified bundle and copied to the `dist` folder
+
+```bash
+npm run build
+```
+
+### Running Verdaccio
+
+```bash
+verdaccio
+```
+
+```bash
+$ verdaccio
+info --- Creating default config file in /Users/briangaines/.config/verdaccio/config.yaml
+warn --- config file  - /Users/briangaines/.config/verdaccio/config.yaml
+warn --- Plugin successfully loaded: verdaccio-htpasswd
+warn --- Plugin successfully loaded: verdaccio-audit
+warn --- http address - http://localhost:4873/ - verdaccio/5.7.0
+```
+
+### Publish
+
+To our Development NPM Server (**Verdaccio**)
+
+> Make sure to run the `verdaccio` command before the release to development
+
+```bash
+npm run release:dev
+```
+
+#### You might see this message
+
+```bash
+npm ERR! need auth This command requires you to be logged in to http://localhost:4873/
+npm ERR! need auth You need to authorize this machine using `npm adduser`
+```
+
+If you do, then Login using the following command. You can see this by opening http://localhost:4873/ in a browser window.
+
+```bash
+npm adduser --registry http://localhost:4873/
+# enter a username
+# enter a password
+# enter an email address
+```
+
+After you authenticate, head on over to the browser window and if you're not logged in already, go ahead and login. You may need to run `npm run release:dev` once more if you did need to login first. At this point, your developmentVersion in your `package.json` file will have been incremented 2x, which is fine.
+
+![](assets/md-images/verdaccio-package.png)
+
+Okay, you should be ready to test this out in your own test project. We'll just use a create-react-app CLI to show you the process, but you can choose your own project or framework to test with.
+
+```bash
+npx create-react-app hello-athlete &&
+cd hello-athlete &&
+npm install athlete-calculations --registry http://localhost:4873 &&
+cd src
+```
+
+You should now have the package installed, so add code a page and give it a spin! _Scroll down for an example._
+
+![](assets/md-images/mock-results-output.png)
+
+Go Live on the NPM Server (**NPM**)
+
+```bash
+npm run release:prod
 ```
 
 ## Formats
@@ -125,7 +237,7 @@ calculateDistance({
 
 ## Fake Race Results Data API
 
-The API provides you with an array of 30 race results you can use. The results data is came from a real race, but the names were replaced with random names from a random name generator. We also took the liberty of parsing the hours, minutes, and seconds from the result race results to make it easier to get at the individual time parts.
+We provide mock race results that contain 30 individual's 5K race results that you can use to test with your own development efforts. We also took the liberty of parsing the hours, minutes, and seconds from the race results to make it easier to get at the individual time parts. Feel free to use this data for testing pulling race results information and testing with your own codebase. _If you'd like to see any other mock data as part of the API, open an issue and provide a suggestion_.
 
 ```js
 import { fake5kRaceResults } from 'athlete-calculations';
@@ -165,6 +277,81 @@ import { fake5kRaceResults } from 'athlete-calculations';
   },
 ];
 ```
+
+### Example using the mock data with this package
+
+```javascript
+import { calculatePace, fake5kRaceResults } from 'athlete-calculations';
+
+function fakeData() {
+  return {
+    fetch: () => fake5kRaceResults,
+  };
+}
+
+function pace() {
+  return {
+    processResults: (data) =>
+      data.map((resultItem) => {
+        const { distance, units, hours, minutes, seconds } = resultItem;
+        return {
+          ...resultItem,
+          pace: calculatePace({
+            distance: { traveled: distance, units },
+            time: {
+              hours,
+              minutes,
+              seconds,
+              units,
+            },
+            format: '%M:%SS',
+          }).pace.formatted,
+        };
+      }),
+  };
+}
+
+const faker = fakeData();
+const fakeResults = faker.fetch();
+const p = pace();
+console.log(
+  'Calculate pace and append to race results',
+  JSON.stringify(p.processResults(fakeResults), null, 2),
+);
+```
+
+## Folder and File Structure
+
+```
+dist
+src
+ ┣ api
+ ┣ core
+ ┣ mock-data
+ ┣ utils
+ ┣ index.js
+ ┣ package.json
+ ┗ release.js
+ test
+  ┣ index.js
+```
+
+### dist
+
+### src/
+
+- index.js - entry point
+- release.js - script to help us manage releases to development and production
+
+### src/api
+
+### src/core
+
+### src/mock-data
+
+### src/utils
+
+### test
 
 ## Contributing
 

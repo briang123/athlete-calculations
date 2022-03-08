@@ -7,7 +7,6 @@ import {
   fake5kRaceResults,
 } from 'athlete-calculations';
 
-// *** TEST FUNCTIONS
 function fakeData() {
   return {
     fetch: () => fake5kRaceResults,

@@ -8,7 +8,7 @@ import {
   PACE_UNITS,
   SECONDS_PER_MINUTE,
 } from '../core/constants.js';
-
+import { round } from '../utils/common.js';
 
 export function getTimeParts(time) {
   const totalMinutes = getTotalMinutesFromTime(time);
@@ -22,8 +22,9 @@ export function getTimeParts(time) {
   return { days, hours, minutes, seconds };
 }
 
-export function getDecimalPart(value) {
-  return value % 1;
+export function getDecimalPart(value, places = 99) {
+  return round(value % 1, places);
+  // return round(value % 1, places);
 }
 
 export function getMinutesFromSeconds(seconds) {

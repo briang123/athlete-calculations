@@ -1,16 +1,16 @@
 {
-  "name": "test",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "type": "module",
+  "name": "test",
+  "version": "0.0.0",
+  "description": "Create some use cases against the linked athlete-calculations package as someone who installed the npm package.",
+  "main": "index.js",
   "dependencies": {
     "athlete-calculations": "^1.0.0"
   },
-  "devDependencies": {},
   "scripts": {
-    "test": "node index"
+    "link": "npm link athlete-calculations",
+    "test": "node --experimental-vm-modules index.js"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Brian Gaines",
+  "license": "MIT"
 }
