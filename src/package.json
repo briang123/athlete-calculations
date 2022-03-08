@@ -6,9 +6,11 @@
   "description": "Performs common calculations for athletes and provides a simple mock data API that returns 30 individual race results",
   "main": "./../dist/index.js",
   "scripts": {
+    "contrib-setup": "npm link && cd ../test && npm run link-pkg && cd ../src",
     "build": "./node_modules/.bin/esbuild ./index.js --format=esm --bundle --outfile=./../dist/index.js --platform=node --target=node16.14 --minify",
     "release:dev": "export NODE_ENV=development && npm run build && node ./release.js",
     "release:prod": "export NODE_ENV=production && npm run build && node ./release.js",
+    "test:link": "cd ../test && npm test",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watchAll"
   },
@@ -34,3 +36,4 @@
     "semver": "^7.3.5"
   }
 }
+

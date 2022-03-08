@@ -30,12 +30,8 @@ git clone https://github.com/briang123/athlete-calculations
 # Install Verdaccio globally so we can access it anywhere. This is our local NPM development server for when we want to test changes BEFORE we publish to NPM servers
 npm install -g verdaccio
 
-# If installing locally to run the code and make any changes, then
-# run these commands to setup the project and run tests
-cd athlete-calculations/src && npm link &&
-cd ../src && npm test &&
-cd ../test && npm link athlete-calculations && npm test &&
-cd ../src
+# If installing locally to run the code and make any changes, then run this command to setup the project
+cd athlete-calculations/src && npm run contrib-setup
 ```
 
 ### Running Tests

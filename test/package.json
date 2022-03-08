@@ -8,7 +8,7 @@
     "athlete-calculations": "^1.0.0"
   },
   "scripts": {
-    "link": "npm link athlete-calculations",
+    "link-pkg": "npm link athlete-calculations",
     "test": "node --experimental-vm-modules index.js"
   },
   "author": "Brian Gaines",
