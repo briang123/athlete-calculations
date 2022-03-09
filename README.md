@@ -241,35 +241,35 @@ import { fake5kRaceResults } from 'athlete-calculations';
 // A list of 30 race results
 [
   {
-    Bib: '1',
-    Distance: '3.1',
-    Hours: '0',
-    Minutes: '20',
-    Name: 'Tiffany Carter',
-    Results: '0:20:16',
-    Seconds: '16',
-    Units: 'Miles',
+    bib: 1,
+    distance: 3.1,
+    hours: 0,
+    minutes: 20,
+    name: 'Tiffany Carter',
+    results: '0:20:16',
+    seconds: 16,
+    units: 'miles',
   },
   {
-    Bib: '2',
-    Distance: '3.1',
-    Hours: '0',
-    Minutes: '21',
-    Name: 'Hamza Cohen',
-    Results: '0:21:56',
-    Seconds: '56',
-    Units: 'Miles',
+    bib: 2,
+    distance: 3.1,
+    hours: 0,
+    minutes: 21,
+    name: 'Tiffany Carter',
+    results: '0:20:16',
+    seconds: 56,
+    units: 'miles',
   },
   //... removed for brevity
   {
-    Bib: '30',
-    Distance: '3.1',
-    Hours: '0',
-    Minutes: '29',
-    Name: 'Paxton Weber',
-    Results: '0:29:01',
-    Seconds: '1',
-    Units: 'Miles',
+    bib: 30,
+    distance: 3.1,
+    hours: 0,
+    minutes: 29,
+    name: 'Tiffany Carter',
+    results: '0:20:16',
+    seconds: 1,
+    units: 'miles',
   },
 ];
 ```
@@ -352,7 +352,7 @@ We expose any public facing apis from this directory
 
 ### src/core
 
-- constants.js - It's preferred to use constants so we have meaning behind values that are being used 
+- constants.js - It's preferred to use constants so we have meaning behind values that are being used
 - format.js - All domain objects and functions related to formatting our data
 - distance.js - Anything related to calculating distance
 - pace.js - Anything related to calculating pace
