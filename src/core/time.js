@@ -60,7 +60,7 @@ export function calculateTimeFromDistAndPace({
   const { traveled: dTravel, units: dUnits } = distance;
   const { hours: pHr, minutes: pMin, seconds: pSec, units: pUnits } = pace;
 
-  timeValidator({ dTravel, dUnits, pHr, pMin, pSec, pUnits });
+  timeValidator({ dTravel, pHr, pMin, pSec });
 
   const traveledInMeters = getTravelDistanceInMeters(
     dTravel,

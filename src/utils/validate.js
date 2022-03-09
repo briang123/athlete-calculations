@@ -4,24 +4,6 @@ export function processValidations(queue) {
   queue.forEach((v) => v);
 }
 
-// export function checkForValidUnits(userValue, label, units) {
-//   const validUnits = Object.entries(units).map(([, value]) => ({
-//     label: value,
-//   }));
-
-//   const isValid =
-//     validUnits.filter(({ label: value }) => value === userValue).length === 0;
-
-//   if (!isValid) {
-//     throw new Error(
-//       `The ${label} unit of ${userValue} supplied is invalid. Valid types include: ${labelJoiner(
-//         validUnits,
-//         () => validUnits,
-//       )}`,
-//     );
-//   }
-// }
-
 export function checkForNumberTypes(arr) {
   arr.forEach(({ value, label }) => {
     if (!isNumber(value)) {
