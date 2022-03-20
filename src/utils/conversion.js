@@ -47,6 +47,14 @@ export function getMinutesIntoHour(totalMinutes) {
   return totalMinutes % MINUTES_PER_HOUR;
 }
 
+export function getTimePartsFromTimeString(time) {
+  const _h = Number(time.split(':')[0]);
+  const _m = Number(time.split(':')[1]);
+  const _s = Number(time.split(':')[2]);
+  const totalMinutes = getMinutesFromHMS(_h, _m, _s);
+  return getTimeParts(totalMinutes);
+}
+
 export function getMinutesFromHMS(hours, minutes, seconds) {
   return hours * MINUTES_PER_HOUR + minutes * 1 + seconds / SECONDS_PER_MINUTE;
 }

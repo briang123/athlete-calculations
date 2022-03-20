@@ -1,4 +1,4 @@
-export default [
+const data = [
   {
     bib: 1,
     distance: 3.1,
@@ -300,3 +300,12 @@ export default [
     units: 'miles',
   },
 ];
+
+const getData = ({ count = data.length } = {}) => {
+  if (typeof count !== 'number')
+    throw Error('count must be a valid Number type');
+  const _count = count > data.length ? data.length : count < 0 ? 0 : count;
+  return data.slice(0, _count);
+};
+
+export default getData;
