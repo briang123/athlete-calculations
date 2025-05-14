@@ -58,6 +58,7 @@ export function getTotalTimeTraveled(distance, time) {
 export function getDaysFromHours(hours) {
   return Math.floor(hours / HOURS_PER_DAY);
 }
+
 export function getTotalMinutesFromTime(time) {
   return Math.floor(time);
 }
@@ -72,10 +73,37 @@ export function getTravelDistanceInMeters(distance, units, unitTypes) {
     case unitTypes.MILES:
       return distance * METERS_PER_MILE;
     case unitTypes.KM:
-      return distance / METERS_PER_MILE;
-    // case unitTypes.METERS:
-    //   return distance / METERS_AROUND_TRACK;
+      return distance * METERS_PER_KM;
+    case unitTypes.METERS:
+      return distance * METERS_AROUND_TRACK;
     default:
       throw new Error('Invalid unit type');
   }
 }
+
+export function getTravelDistanceInMiles(distance, units, unitTypes) {
+  switch (units) {
+    case unitTypes.MILES:
+      return distance;
+    case unitTypes.KM:
+      return (distance * METERS_PER_KM) / METERS_PER_MILE;
+    case unitTypes.METERS:
+      return distance / METERS_PER_MILE;
+    default:
+      throw new Error('Invalid unit type');
+  }
+}
+
+export function getTravelDistanceInKilometers(distance, units, unitTypes) {
+  switch (units) {
+    case unitTypes.KM:
+      return distance;
+    case unitTypes.MILES:
+      return (distance * METERS_PER_MILE) / METERS_PER_KM;
+    case unitTypes.METERS:
+      return distance / METERS_PER_KM;
+    default:
+      throw new Error('Invalid unit type');
+  }
+}
+

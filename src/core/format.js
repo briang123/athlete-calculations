@@ -1,6 +1,7 @@
 import { doubleDigitize, pluralize } from '../utils/common.js';
 import {
   merger,
+  _merger,
   getValueFromJsonIfExists,
   mergeTokenPatterns,
 } from '../utils/merge.js';
@@ -8,11 +9,11 @@ import {
 export const FORMAT_PRESETS = {
   'DHMS-LLLL': '%D %DL, %HH %HL, %M %ML, %S %SL',
   'DHMS-llll': '%D%Dl, %H%Hl, %M%Ml, %S%Sl',
-  HMMSS: '%H:%MM:%SS',
+  'HMMSS': '%H:%MM:%SS',
   'DHHMMSS-l': '%D%Dl:%HH:%MM:%SS',
 };
 
-function daysFormatter(value) {
+export function daysFormatter(value) {
   return {
     patterns: /(%D*([DLl]))/,
     tokens: {
@@ -24,7 +25,7 @@ function daysFormatter(value) {
   };
 }
 
-function hoursFormatter(value) {
+export function hoursFormatter(value) {
   return {
     patterns: /(%H*([HLl]))/,
     tokens: {
@@ -36,25 +37,25 @@ function hoursFormatter(value) {
   };
 }
 
-function minutesFormatter(value) {
+export function minutesFormatter(value) {
   return {
     patterns: /(%M*([MLl]))/,
     tokens: {
       '%MM': doubleDigitize(value),
       '%M': `${value}`,
-      '%Ml': 'min',
+      '%Ml': pluralize('min', value, 's'),
       '%ML': pluralize('minute', value, 's'),
     },
   };
 }
 
-function secondsFormatter(value) {
+export function secondsFormatter(value) {
   return {
     patterns: /(%S*([SLl]))/,
     tokens: {
       '%SS': doubleDigitize(value),
       '%S': `${value}`,
-      '%Sl': 'sec',
+      '%Sl': pluralize('sec', value, 's'),
       '%SL': pluralize('second', value, 's'),
     },
   };
@@ -74,5 +75,6 @@ export function formatter({ format, days, hours, minutes, seconds }) {
   ]);
   const tokens = { ...D.tokens, ...H.tokens, ...M.tokens, ...S.tokens };
   const _format = getValueFromJsonIfExists(format, FORMAT_PRESETS);
+  console.log('formatter', {days, hours, minutes, seconds, patterns, tokens, _format});
   return merger({ format: _format, patterns, tokens });
 }

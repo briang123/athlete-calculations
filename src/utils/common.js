@@ -16,7 +16,7 @@ export function round(value, places) {
 }
 
 export function isOne(value) {
-  if (isNumber(value)) return value === 1;
+  if (isNumber(value)) return value === 1 || value === -1;
   if (isString(value)) return value?.length === 1;
   if (Array.isArray(value)) return value.length === 1;
   return false;
