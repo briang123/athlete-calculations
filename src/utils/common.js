@@ -30,3 +30,11 @@ export function doubleDigitize(value) {
 export function pluralize(word, count, ending) {
   return `${word}${isOne(count) ? '' : ending}`;
 }
+
+export function containZeroValues(arr) {
+  return arr?.some((v) => v === 0);
+}
+
+export function areNonNegativeValues(arr) {
+  return arr?.every((v) => v >= 0);
+}

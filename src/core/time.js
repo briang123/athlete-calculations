@@ -1,4 +1,12 @@
 import { formatter } from './format.js';
+
+import {
+  checkForNumberTypes,
+  checkForZeroValues,
+  checkForNegativeValues,
+  processValidations,
+  getLabelValueObject,
+} from './../utils/validate.js';
 import {
   DISTANCE_UNITS,
   METERS_PER_MILE,
@@ -24,7 +32,26 @@ function getDistancePace(minutes, units, unitTypes) {
   }
 }
 
-//todo: validate parameters
+function timeValidator({ dTravel, pHr, pMin, pSec }) {
+  const _pHr = getLabelValueObject('hour', pHr);
+  const _pMin = getLabelValueObject('minutes', pMin);
+  const _pSec = getLabelValueObject('seconds', pSec);
+  const _dTravel = getLabelValueObject('distance', dTravel);
+
+  const hr_min_sec_tvl = [_pHr, _pMin, _pSec, _dTravel];
+  const validNumberCheckParams = checkForNumberTypes(hr_min_sec_tvl);
+  const validZeroCheckParams = checkForZeroValues([_dTravel]);
+  const validNonNegativeCheckParams = checkForNegativeValues(hr_min_sec_tvl);
+
+  const queue = [
+    validNumberCheckParams,
+    validZeroCheckParams,
+    validNonNegativeCheckParams,
+  ];
+
+  processValidations(queue);
+}
+
 export function calculateTimeFromDistAndPace({
   distance = { traveled, units },
   pace = { hours, minutes, seconds, units },
@@ -32,6 +59,8 @@ export function calculateTimeFromDistAndPace({
 } = {}) {
   const { traveled: dTravel, units: dUnits } = distance;
   const { hours: pHr, minutes: pMin, seconds: pSec, units: pUnits } = pace;
+
+  timeValidator({ dTravel, pHr, pMin, pSec });
 
   const traveledInMeters = getTravelDistanceInMeters(
     dTravel,
@@ -56,32 +85,3 @@ export function calculateTimeFromDistAndPace({
     },
   };
 }
-
-
-//TODO: VALIDATION THOUGHTS...
-// function containZeroValues(arr) {
-//   return arr.some((v) => v === 0);
-// }
-
-// function areNonNegativeValues(arr) {
-//   return arr.every((v) => v >= 0);
-// }
-
-// if (
-//   !isNumber(hours) ||
-//   !isNumber(minutes) ||
-//   !isNumber(seconds) ||
-//   !isNumber(distance)
-// ) {
-//   throw new Error(
-//     'Hours, minutes, seconds, and distance must be a valid number',
-//   );
-// }
-
-// if (containZeroValues([minutes, distance])) {
-//   throw new Error('Minutes and distance must be greater than 0');
-// }
-
-// if (!areNonNegativeValues([hours, minutes, seconds, distance])) {
-//   throw new Error('Negative values are not allowed');
-// }

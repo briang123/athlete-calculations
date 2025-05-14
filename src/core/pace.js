@@ -6,6 +6,13 @@ import {
   PACE_UNITS,
 } from './constants.js';
 import {
+  checkForNumberTypes,
+  checkForZeroValues,
+  checkForNegativeValues,
+  processValidations,
+  getLabelValueObject,
+} from './../utils/validate.js';
+import {
   getMinutesFromHMS,
   getTravelDistanceInMeters,
   getTimeParts,
@@ -27,6 +34,26 @@ function getDistanceTime(minutes, units, unitTypes) {
   }
 }
 
+function paceValidator({ dTravel, tHr, tMin, tSec }) {
+  const _tHr = getLabelValueObject('hour', tHr);
+  const _tMin = getLabelValueObject('minutes', tMin);
+  const _tSec = getLabelValueObject('seconds', tSec);
+  const _dTravel = getLabelValueObject('distance', dTravel);
+
+  const hr_min_sec_tvl = [_tHr, _tMin, _tSec, _dTravel];
+  const validNumberCheckParams = checkForNumberTypes(hr_min_sec_tvl);
+  const validZeroCheckParams = checkForZeroValues([_dTravel]);
+  const validNonNegativeCheckParams = checkForNegativeValues(hr_min_sec_tvl);
+
+  const queue = [
+    validNumberCheckParams,
+    validZeroCheckParams,
+    validNonNegativeCheckParams,
+  ];
+
+  processValidations(queue);
+}
+
 //todo: validate parameters
 export function calculatePaceFromDistAndTime({
   distance = { traveled, units },
@@ -35,6 +62,8 @@ export function calculatePaceFromDistAndTime({
 } = {}) {
   const { traveled: dTravel, units: dUnits } = distance;
   const { hours: tHr, minutes: tMin, seconds: tSec } = time;
+
+  paceValidator({ dTravel, tHr, tMin, tSec });
 
   const traveledInMeters = getTravelDistanceInMeters(
     dTravel,

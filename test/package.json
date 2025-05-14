@@ -10,7 +10,11 @@
   "scripts": {
     "link": "npm link athlete-calculations",
     "test": "node --experimental-vm-modules index.js",
-    "test:watch": "node --experimental-vm-modules index.js --watch"
+    "test:watch": "node --experimental-vm-modules index.js --watch",
+    "test:all": "npm run test:pace && npm run test:time && npm run test:distance",
+    "test:pace": "node --experimental-vm-modules pace.js",
+    "test:time": "node --experimental-vm-modules time.js",
+    "test:distance": "node --experimental-vm-modules distance.js"
   },
   "author": "Brian Gaines",
   "license": "MIT"

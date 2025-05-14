@@ -47,6 +47,14 @@ export function getMinutesIntoHour(totalMinutes) {
   return totalMinutes % MINUTES_PER_HOUR;
 }
 
+export function getTimePartsFromTimeString(time) {
+  const _h = Number(time.split(':')[0]);
+  const _m = Number(time.split(':')[1]);
+  const _s = Number(time.split(':')[2]);
+  const totalMinutes = getMinutesFromHMS(_h, _m, _s);
+  return getTimeParts(totalMinutes);
+}
+
 export function getMinutesFromHMS(hours, minutes, seconds) {
   return hours * MINUTES_PER_HOUR + minutes * 1 + seconds / SECONDS_PER_MINUTE;
 }
@@ -90,7 +98,7 @@ export function getTravelDistanceInMiles(distance, units, unitTypes) {
     case unitTypes.METERS:
       return distance / METERS_PER_MILE;
     default:
-      throw new Error('Invalid unit type');
+      throw new Error(`Invalid unit type: ${units}`);
   }
 }
 

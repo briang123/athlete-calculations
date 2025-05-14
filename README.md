@@ -30,12 +30,8 @@ git clone https://github.com/briang123/athlete-calculations
 # Install Verdaccio globally so we can access it anywhere. This is our local NPM development server for when we want to test changes BEFORE we publish to NPM servers
 npm install -g verdaccio
 
-# If installing locally to run the code and make any changes, then
-# run these commands to setup the project and run tests
-cd athlete-calculations &&
-cd src && npm link && npm test &&
-cd ../test && npm link athlete-calculations && npm test &&
-cd ../src
+# If installing locally to run the code and make any changes, then run this command to setup the project
+cd athlete-calculations/src && npm run contrib-setup
 ```
 
 ### Running Tests
@@ -245,35 +241,35 @@ import { fake5kRaceResults } from 'athlete-calculations';
 // A list of 30 race results
 [
   {
-    Bib: '1',
-    Distance: '3.1',
-    Hours: '0',
-    Minutes: '20',
-    Name: 'Tiffany Carter',
-    Results: '0:20:16',
-    Seconds: '16',
-    Units: 'Miles',
+    bib: 1,
+    distance: 3.1,
+    hours: 0,
+    minutes: 20,
+    name: 'Tiffany Carter',
+    results: '0:20:16',
+    seconds: 16,
+    units: 'miles',
   },
   {
-    Bib: '2',
-    Distance: '3.1',
-    Hours: '0',
-    Minutes: '21',
-    Name: 'Hamza Cohen',
-    Results: '0:21:56',
-    Seconds: '56',
-    Units: 'Miles',
+    bib: 2,
+    distance: 3.1,
+    hours: 0,
+    minutes: 21,
+    name: 'Tiffany Carter',
+    results: '0:20:16',
+    seconds: 56,
+    units: 'miles',
   },
   //... removed for brevity
   {
-    Bib: '30',
-    Distance: '3.1',
-    Hours: '0',
-    Minutes: '29',
-    Name: 'Paxton Weber',
-    Results: '0:29:01',
-    Seconds: '1',
-    Units: 'Miles',
+    bib: 30,
+    distance: 3.1,
+    hours: 0,
+    minutes: 29,
+    name: 'Tiffany Carter',
+    results: '0:20:16',
+    seconds: 1,
+    units: 'miles',
   },
 ];
 ```
@@ -322,6 +318,8 @@ console.log(
 
 ## Folder and File Structure
 
+It's understood that the structure of this project could change as we add more calculations and new functionality.
+
 ```
 dist
 src
@@ -338,6 +336,8 @@ src
 
 ### dist
 
+This is the folder where the released package bundle lives
+
 ### src/
 
 - index.js - entry point
@@ -345,13 +345,32 @@ src
 
 ### src/api
 
+We expose any public facing apis from this directory
+
+- fake-data.js - public api providing fake data
+- pace-calculator.js - public api providing all available functions related to pace the pace calculator
+
 ### src/core
+
+- constants.js - It's preferred to use constants so we have meaning behind values that are being used
+- format.js - All domain objects and functions related to formatting our data
+- distance.js - Anything related to calculating distance
+- pace.js - Anything related to calculating pace
+- time.js - Anything related to calculating time
 
 ### src/mock-data
 
+Any data that we want to return as part of our mock data api
+
 ### src/utils
 
+- common.js - common household functions
+- conversion.js - functions pertaining to converting values
+- merge.js - functions pertaining to merging content together
+
 ### test
+
+This directory's index file allows for us to test the package prior to releasing it as we've created an npm link to the package in the src directory (`npm run link-pkg`). This allows us to simulate testing from a separate project.
 
 ## Contributing
 
