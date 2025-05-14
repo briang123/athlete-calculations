@@ -1,4 +1,4 @@
-import { mergeText, getValueFromJsonIfExists, mergeTokenPatterns, merger, sequencer, patternMatcher } from '../merge.js';
+import { getValueFromJsonIfExists, mergeTokenPatterns, tokenBasedMergeText, tokenBasedMerger, sequencer, patternMatcher } from '../merge.js';
 
 describe('Tests for the merge functions', () => {
 
@@ -8,15 +8,15 @@ describe('Tests for the merge functions', () => {
     expect(sequenced).toEqual(['name', 'John', 'age', 30]);
   });
 
-  it('should merge text', () => {
+  it('should merge text based on tokens', () => {
     const text = 'Hello {name}';
-    const mergedText = mergeText(text, ['{name}', 'John']);
+    const mergedText = tokenBasedMergeText(text, ['{name}', 'John']);
     expect(mergedText).toEqual('Hello John');
   });
 
   it('should merge text with multiple tokens', () => {
     const text = 'Hello {name} and {age}';
-    const mergedText = mergeText(text, ['{name}', 'John', '{age}', 30]);
+    const mergedText = tokenBasedMergeText(text, ['{name}', 'John', '{age}', 30]);
     expect(mergedText).toEqual('Hello John and 30');
   });
 
@@ -32,10 +32,10 @@ describe('Tests for the merge functions', () => {
     expect(mergedPatterns).toEqual(/\{name\}|\{age\}/g);
   });
 
-  it('should merge', () => {
+  it('should merge token based', () => {
     const format = 'Hello {name}, are you {age} years old?';
     const tokens = { '{name}': 'John', '{age}': 30 };
-    const merged = merger({ format, tokens });
+    const merged = tokenBasedMerger({ format, tokens });
     expect(merged).toEqual('Hello John, are you 30 years old?');
   });
 

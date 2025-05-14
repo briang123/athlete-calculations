@@ -13,12 +13,12 @@ export function sequencer(json = {}) {
   return [...new Set(Object.entries(json))].flat();
 }
 
-export function merger({ format, tokens }) {
+export function tokenBasedMerger({ format, tokens }) {
   const sequenced = sequencer(tokens);
-  return mergeText(format, sequenced);
+  return tokenBasedMergeText(format, sequenced);
 }
 
-export function mergeText(text, sequence = []) {
+export function tokenBasedMergeText(text, sequence = []) {
   const replacements = {};
   for (let i = 0; i < sequence.length; i += 2) {
     replacements[sequence[i]] = sequence[i + 1];
@@ -29,14 +29,15 @@ export function mergeText(text, sequence = []) {
   });
 }
 
-// export function _merger({ format, pattern, tokens }) {
-//   const sequenced = sequencer(tokens);
-//   return _mergeText(format, pattern, sequenced);
-// }
+export function patternBasedMerger({format, patterns, tokens}) {
+  return patternBasedMergeText(format, patterns, tokens);
+}
 
-// export function _mergeText(text, pattern, sequence = []) {
-//   return text.replace(pattern, (match) => patternMatcher(match, sequence));
-// }
+export function patternBasedMergeText(text, pattern, tokens) {
+  return text.replace(pattern, (match) => {
+    return tokens[match] || match;
+  });
+}
 
 export function getValueFromJsonIfExists(value, json) {
   const sequence = sequencer(json);
