@@ -9,7 +9,8 @@
   },
   "scripts": {
     "link": "npm link athlete-calculations",
-    "test": "node --experimental-vm-modules index.js"
+    "test": "node --experimental-vm-modules index.js",
+    "test:watch": "node --experimental-vm-modules index.js --watch"
   },
   "author": "Brian Gaines",
   "license": "MIT"

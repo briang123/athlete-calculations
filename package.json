@@ -1,0 +1,11 @@
+{
+  "name": "athlete-calculations",
+  "version": "0.0.0",
+  "type": "module",
+  "devDependencies": {
+    "esbuild": "^0.14.25",
+    "jest": "^27.5.1",
+    "jest-cli": "^27.5.1",
+    "semver": "^7.3.5"
+  }
+} 
