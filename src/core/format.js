@@ -1,13 +1,12 @@
 import { doubleDigitize, pluralize } from '../utils/common.js';
 import {
-  merger,
-  _merger,
+  patternBasedMerger,
   getValueFromJsonIfExists,
   mergeTokenPatterns,
 } from '../utils/merge.js';
 
 export const FORMAT_PRESETS = {
-  'DHMS-LLLL': '%D %DL, %HH %HL, %M %ML, %S %SL',
+  'DHMS-LLLL': '%D %DL, %H %HL, %M %ML, %S %SL',
   'DHMS-llll': '%D%Dl, %H%Hl, %M%Ml, %S%Sl',
   'HMMSS': '%H:%MM:%SS',
   'DHHMMSS-l': '%D%Dl:%HH:%MM:%SS',
@@ -75,6 +74,5 @@ export function formatter({ format, days, hours, minutes, seconds }) {
   ]);
   const tokens = { ...D.tokens, ...H.tokens, ...M.tokens, ...S.tokens };
   const _format = getValueFromJsonIfExists(format, FORMAT_PRESETS);
-  console.log('formatter', {days, hours, minutes, seconds, patterns, tokens, _format});
-  return merger({ format: _format, patterns, tokens });
+  return patternBasedMerger({ format: _format, patterns, tokens });
 }

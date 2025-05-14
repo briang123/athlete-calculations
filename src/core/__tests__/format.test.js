@@ -138,33 +138,43 @@ describe('Tests for the format functions', () => {
     })).toEqual('3:04');
   });
 
-  it('should format the format function with a custom format', () => {
+  it('should format the format function with a custom format DHMS-LLLL', () => {
     expect(formatter({
-      format: '%M:%SS',         
+      format: 'DHMS-LLLL',         
       days: 1,
       hours: 2,
       minutes: 3,
       seconds: 4
-    })).toEqual('3:04');
-                });   
-
-  it('should format the format function with a custom format', () => {
-    expect(formatter({
-      format: '%M:%SS',    
-      days: 1,
-      hours: 2,
-      minutes: 3,
-      seconds: 4
-    })).toEqual('3:04');    
+    })).toEqual('1 day, 2 hours, 3 minutes, 4 seconds');   
+    
   });
 
-  it('should format the format function with a custom format', () => {
+  it('should format the format function with a custom format DHMS-llll', () => {    
     expect(formatter({
-      format: '%M:%SS',    
+      format: 'DHMS-llll',
       days: 1,
       hours: 2,
       minutes: 3,
       seconds: 4
-    })).toEqual('3:04');
+    })).toEqual('1d, 2hrs, 3mins, 4secs');
+  });
+
+  it('should format the format function with a custom format HMMSS', () => {
+    expect(formatter({
+      format: 'HMMSS',
+      hours: 1,
+      minutes: 2,
+      seconds: 3
+    })).toEqual('1:02:03');
+  });
+
+  it('should format the format function with a custom format DHHMMSS-l', () => {
+    expect(formatter({
+      format: 'DHHMMSS-l',
+      days: 1,
+      hours: 2,
+      minutes: 3,
+      seconds: 4
+    })).toEqual('1d:02:03:04');
   });
 });
